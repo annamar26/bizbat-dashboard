@@ -15,13 +15,13 @@ import { DataService } from '../services/data.service';
   ],
   imports: [
     CommonModule,
-  MatSelectModule
+    MatSelectModule
   //   LiveEventRoutingModule
   ],
   exports:[
     SelectorComponent,
     CanvaComponent
   ],
- 
+
 })
 export class ComponentsModule { }

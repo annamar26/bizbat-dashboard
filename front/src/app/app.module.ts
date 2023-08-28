@@ -10,17 +10,17 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 // import { TableViewComponent } from './components/table-view/table-view.component';
-import { CanvaComponent } from './components/canva/canva.component';
+// import { CanvaComponent } from './components/canva/canva.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     // TableViewComponent,
-    CanvaComponent
+    // CanvaComponent
   ],
   imports: [
-    // ComponentsModule,
+    ComponentsModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
