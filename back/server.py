@@ -1,27 +1,20 @@
 #!/usr/bin/python3
 
 # === IMPORTS ===
-import os
+# Utils
 from flask import Flask
 
+# BizBat Dashboard
+from .blueprints import live_events, posts, users
 
 # === GLOBALS ===
 app = Flask(__name__)
 
-@app.route('/users/most-followed/')
-def endpoint1():
-    return 'This is endpoint 1'
-
-@app.route('/users/')
-def endpoint2():
-    return 'This is endpoint 2'
+live_events.bp_register_views(app)
+posts.bp_register_views(app)
+users.bp_register_views(app)
 
 
 # === MAIN ===
 if __name__ == '__main__':
-    os.environ['DEBUG'] = 'true'
-    os.environ['AUTHLIB_INSECURE_TRANSPORT'] = 'true'
-    os.environ['FLASK_DEBUG'] = '1'
-    os.environ['INO_DEBUG'] = 'true'
-
     app.run(debug=True, host='0.0.0.0', port=5000, threaded=True)  # nosec
