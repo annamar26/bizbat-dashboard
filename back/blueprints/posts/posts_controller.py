@@ -17,8 +17,19 @@ def obtain_json_data():
 
 # === CLASSES ===
 class Post:
-
-    def __init__(self, type, id, url, user, totalLikes, isBlocked, isActive, totalViews, location, date):
+    def __init__(
+        self,
+        type,
+        id,
+        url,
+        user,
+        totalLikes,
+        isBlocked,
+        isActive,
+        totalViews,
+        location,
+        date,
+    ):
         self.type = type
         self.oid = id
         self.url = url
@@ -44,33 +55,45 @@ class Post:
             "isActive": self.isActive,
             "totalViews": self.totalViews,
             "location": self.location,
-            "date": self.date
+            "date": self.date,
         }
 
 
 class Posts:
-
     def __init__(self):
         data = obtain_json_data()
-        self.posts = [Post(
-            item.get("type"), item.get("id"), item.get("url"),
-            item.get("user"), item.get("totalLikes"), item.get("isBlocked"),
-            item.get("isActive"), item.get("totalViews"), item.get("location"),
-            item.get("date")) for item in data
+        self.posts = [
+            Post(
+                type=item.get("type"),
+                id=item.get("id"),
+                url=item.get("url"),
+                user=item.get("user"),
+                totalLikes=item.get("totalLikes"),
+                isBlocked=item.get("isBlocked"),
+                isActive=item.get("isActive"),
+                totalViews=item.get("totalViews"),
+                location=item.get("location"),
+                date=item.get("date"),
+            )
+            for item in data
         ]
 
     def get_top_n_of_total_likes(self, n=None):
         posts_with_likes = [post for post in self.posts if post.totalLikes is not None]
-        sorted_objects = sorted(posts_with_likes, key=lambda x: getattr(x, "totalLikes"), reverse=True)
+        sorted_objects = sorted(
+            posts_with_likes, key=lambda x: getattr(x, "totalLikes"), reverse=True
+        )
         result = [post.to_dict() for post in sorted_objects]
-        
+
         return result[:n]
 
     def get_top_n_of_total_views(self, n: int):
         posts_with_views = [post for post in self.posts if post.totalViews is not None]
-        sorted_objects = sorted(posts_with_views, key=lambda x: getattr(x, "totalViews"), reverse=True)
+        sorted_objects = sorted(
+            posts_with_views, key=lambda x: getattr(x, "totalViews"), reverse=True
+        )
         result = [post.to_dict() for post in sorted_objects]
-        
+
         return result[:n]
 
     def get_top_n_of_writers(self, n: int):

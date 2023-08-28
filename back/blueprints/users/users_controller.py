@@ -17,10 +17,24 @@ def obtain_json_data():
 
 # === CLASSES ===
 class LiveEvent:
-
-    def __init__(self, language, profileType, username, email, name, hire, totalFollowers,
-                 createdAt, freePremium, isPremium, totalActivePosts, totalInactivePosts, country,
-                 city, musicalGenres):
+    def __init__(
+        self,
+        language,
+        profileType,
+        username,
+        email,
+        name,
+        hire,
+        totalFollowers,
+        createdAt,
+        freePremium,
+        isPremium,
+        totalActivePosts,
+        totalInactivePosts,
+        country,
+        city,
+        musicalGenres,
+    ):
         self.language = language
         self.profileType = profileType
         self.username = username
@@ -42,23 +56,34 @@ class LiveEvent:
 
 
 class LiveEvents:
-
     def __init__(self):
         data = obtain_json_data()
-        self.events = [LiveEvent(
-            item.get("language"), item.get("profileType"), item.get("username"),
-            item.get("email"), item.get("name"), item.get("hire"),
-            item.get("totalFollowers"), item.get("createdAt"),
-            item.get("freePremium"), item.get("isPremium"), item.get("totalActivePosts"),
-            item.get("totalInactivePosts"), item.get("country"), item.get("city"),
-            item.get("musicalGenres")) for item in data
+        self.events = [
+            LiveEvent(
+                language=item.get("language"),
+                profileType=item.get("profileType"),
+                username=item.get("username"),
+                email=item.get("email"),
+                name=item.get("name"),
+                hire=item.get("hire"),
+                totalFollowers=item.get("totalFollowers"),
+                createdAt=item.get("createdAt"),
+                freePremium=item.get("freePremium"),
+                isPremium=item.get("isPremium"),
+                totalActivePosts=item.get("totalActivePosts"),
+                totalInactivePosts=item.get("totalInactivePosts"),
+                country=item.get("country"),
+                city=item.get("city"),
+                musicalGenre=item.get("musicalGenres"),
+            )
+            for item in data
         ]
 
     # Function to get the top N objects based on a specified field
     def get_top_n(objects, field, n):
         # Sort the objects based on the specified field in descending order
         sorted_objects = sorted(objects, key=lambda x: getattr(x, field), reverse=True)
-        
+
         # Return the top N objects
         return sorted_objects[:n]
 
@@ -66,6 +91,6 @@ class LiveEvents:
         return self.events
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
     events = LiveEvents().get_test()
     print(events)

@@ -17,8 +17,9 @@ def obtain_json_data():
 
 # === CLASSES ===
 class LiveEvent:
-
-    def __init__(self, eventOwner, id, price, currency, artists, title, genres, location, date):
+    def __init__(
+        self, eventOwner, id, price, currency, artists, title, genres, location, date
+    ):
         self.eventOwner = eventOwner
         self.oid = id
         self.price = price
@@ -34,20 +35,28 @@ class LiveEvent:
 
 
 class LiveEvents:
-
     def __init__(self):
         data = obtain_json_data()
-        self.events = [LiveEvent(
-            item.get("eventOwner"), item.get("id"), item.get("price"),
-            item.get("currency"), item.get("artists"), item.get("title"),
-            item.get("genres"), item.get("location"), item.get("date")) for item in data
+        self.events = [
+            LiveEvent(
+                eventOwner=item.get("eventOwner"),
+                oid=item.get("id"),
+                price=item.get("price"),
+                currency=item.get("currency"),
+                artists=item.get("artists"),
+                title=item.get("title"),
+                genres=item.get("genres"),
+                location=item.get("location"),
+                date=item.get("date"),
+            )
+            for item in data
         ]
 
     # Function to get the top N objects based on a specified field
     def get_top_n(objects, field, n):
         # Sort the objects based on the specified field in descending order
         sorted_objects = sorted(objects, key=lambda x: getattr(x, field), reverse=True)
-        
+
         # Return the top N objects
         return sorted_objects[:n]
 
@@ -55,6 +64,6 @@ class LiveEvents:
         return self.events
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
     events = LiveEvents().get_test()
     print(events)

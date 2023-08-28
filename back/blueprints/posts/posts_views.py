@@ -11,10 +11,10 @@ from blueprints.posts.posts_controller import Posts
 from exceptions import ExceptionHandler, InvalidDataException
 from utils import convert_data
 
+
 # === CLASSES ===
 # /top-views/
 class PostsTopViews(MethodView):
-
     def __init__(self):
         super().__init__()
         self.logger = logging.getLogger(type(self).__name__)
@@ -23,12 +23,14 @@ class PostsTopViews(MethodView):
         # Grab the logs and push to a controller.
         controller = Posts()
         try:
-            items = int(request.args.get('items')) if request.args.get('items') else 10
+            items = int(request.args.get("items")) if request.args.get("items") else 10
             users = controller.get_top_n_of_total_views(items)
-            return make_response(convert_data(users, 'application/json'), 200)
+            return make_response(convert_data(users, "application/json"), 200)
         except ValueError as ex:
             eh = ExceptionHandler()
-            return eh.handle(InvalidDataException("'items' parameter must be an integer."))
+            return eh.handle(
+                InvalidDataException("'items' parameter must be an integer.")
+            )
         except Exception as ex:
             eh = ExceptionHandler()
             return eh.handle(ex)
@@ -36,7 +38,6 @@ class PostsTopViews(MethodView):
 
 # /top-likes/
 class PostsTopLikes(MethodView):
-
     def __init__(self):
         super().__init__()
         self.logger = logging.getLogger(type(self).__name__)
@@ -45,12 +46,14 @@ class PostsTopLikes(MethodView):
         # Grab the logs and push to a controller.
         controller = Posts()
         try:
-            items = int(request.args.get('items')) if request.args.get('items') else 10
+            items = int(request.args.get("items")) if request.args.get("items") else 10
             users = controller.get_top_n_of_total_likes(items)
-            return make_response(convert_data(users, 'application/json'), 200)
+            return make_response(convert_data(users, "application/json"), 200)
         except ValueError as ex:
             eh = ExceptionHandler()
-            return eh.handle(InvalidDataException("'items' parameter must be an integer."))
+            return eh.handle(
+                InvalidDataException("'items' parameter must be an integer.")
+            )
         except Exception as ex:
             eh = ExceptionHandler()
             return eh.handle(ex)
@@ -58,7 +61,6 @@ class PostsTopLikes(MethodView):
 
 # /top-writers/
 class PostsTopWriters(MethodView):
-
     def __init__(self):
         super().__init__()
         self.logger = logging.getLogger(type(self).__name__)
@@ -67,12 +69,14 @@ class PostsTopWriters(MethodView):
         # Grab the logs and push to a controller.
         controller = Posts()
         try:
-            items = int(request.args.get('items')) if request.args.get('items') else 10
+            items = int(request.args.get("items")) if request.args.get("items") else 10
             users = controller.get_top_n_of_writers(items)
-            return make_response(convert_data(users, 'application/json'), 200)
+            return make_response(convert_data(users, "application/json"), 200)
         except ValueError as ex:
             eh = ExceptionHandler()
-            return eh.handle(InvalidDataException("'items' parameter must be an integer."))
+            return eh.handle(
+                InvalidDataException("'items' parameter must be an integer.")
+            )
         except Exception as ex:
             eh = ExceptionHandler()
             return eh.handle(ex)
