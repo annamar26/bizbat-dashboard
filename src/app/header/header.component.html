@@ -1,0 +1,13 @@
+<div class="header-container">
+    <img src="/assets/logo-bizbat.svg" alt="bizbat-logo" />
+    <p class="title">Dashboard</p>
+  
+    <div class="options">
+      <ng-container *ngFor="let option of sections">
+        <p class="option" [routerLink]="option.label">
+          {{ option.value }}
+        </p>
+      </ng-container>
+    </div>
+  </div>
+  

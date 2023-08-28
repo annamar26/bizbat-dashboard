@@ -1,0 +1,29 @@
+.header-container, .options{
+    background-color: #362D47;
+    height: 4.2rem;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    align-items: center;
+    font-family: 'Livvic', sans-serif;
+    padding: 0 24px;
+
+    img{
+        height: 100%;
+        width: 10rem
+    }
+
+    .title, .option{
+        color: #ffff;
+        font-size: large;
+    }
+
+    .options{
+        width: 80%;
+        right: 2;
+        justify-content: flex-end;
+      
+    }
+
+}
