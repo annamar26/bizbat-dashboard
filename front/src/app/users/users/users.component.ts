@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-users',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent {
-
+constructor(private dataService: DataService){
+this.dataService.getDummy().subscribe(res=>{
+  console.log(res)
+})
+}
 }

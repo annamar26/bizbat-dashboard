@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, Renderer2 } from '@angular/core';
 import { Chart } from 'chart.js';
+import { DataService } from 'src/app/services/data.service';
 @Component({
   selector: 'app-bar-chart',
   templateUrl: './bar-chart.component.html',

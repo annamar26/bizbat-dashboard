@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatSelectChange } from '@angular/material/select';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 
@@ -8,7 +9,7 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./selector-component.component.scss']
 })
 export class SelectorComponent{
-  selectedOption=   { label: 'Total Followers', value: 'total-followers' };
+  selectedOption!: string
   options: { label: string; value: string }[] = [];
 
   private optionSubject = new BehaviorSubject<string>('');
@@ -18,15 +19,15 @@ export class SelectorComponent{
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
        this.updateOptions(event.url)
+       this.selectedOption = this.options[0].value
       }
     });
-
-
  
   }
 
-  optionSelected() {
-    this.optionSubject.next(this.selectedOption.value);
+  optionSelected(event: MatSelectChange) {
+    this.optionSubject.next(event.value);
+    this.selectedOption = event.value
   }
 
   private updateOptions(segment: string) {

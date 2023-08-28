@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgChartsModule } from 'ng2-charts';
 import { SelectorComponent } from './components/selector-component/selector-component.component';
 import { ComponentsModule } from './components/components.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -22,6 +23,7 @@ import { ComponentsModule } from './components/components.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     NgChartsModule,
+    HttpClientModule
     
   
   ],

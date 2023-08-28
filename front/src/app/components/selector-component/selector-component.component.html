@@ -1,4 +1,4 @@
-<mat-select [(value)]="selectedOption" (selectionChange)="optionSelected()">
+<mat-select [(value)]="selectedOption" (selectionChange)="optionSelected($event)">
     <mat-option *ngFor="let option of options" [value]="option.value">
       {{ option.label }}
     </mat-option>
