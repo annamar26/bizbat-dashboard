@@ -1,10 +1,16 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-live-events',
   templateUrl: './live-events.component.html',
   styleUrls: ['./live-events.component.scss']
 })
-export class LiveEventsComponent {
+export class LiveEventsComponent implements OnInit{
+
+  constructor() {}
+
+  ngOnInit() {
+    console.log("test...");
+  }
 
 }
