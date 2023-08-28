@@ -16,7 +16,7 @@ import { CanvaComponent } from './components/canva/canva.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    
+
   ],
   providers: [],
   bootstrap: [AppComponent]
