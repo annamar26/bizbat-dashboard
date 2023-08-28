@@ -25,7 +25,9 @@ class UsersTopFollowers(MethodView):
         try:
             items = int(request.args.get("items")) if request.args.get("items") else 10
             users = controller.get_top_n_of_total_followers(items)
-            return make_response(convert_data(users, "application/json"), 200)
+            response = make_response(convert_data(users, "application/json"), 200)
+            response.headers.add('Access-Control-Allow-Origin', '*')
+            return response
         except ValueError as ex:
             eh = ExceptionHandler()
             return eh.handle(
@@ -47,7 +49,9 @@ class UsersPremium(MethodView):
         controller = Users()
         try:
             premiums = controller.get_premiums()
-            return make_response(convert_data(premiums, "application/json"), 200)
+            response = make_response(convert_data(premiums, "application/json"), 200)
+            response.headers.add('Access-Control-Allow-Origin', '*')
+            return response
         except Exception as ex:
             eh = ExceptionHandler()
             return eh.handle(ex)
