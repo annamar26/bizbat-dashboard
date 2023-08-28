@@ -68,7 +68,7 @@ def write_data_from_collection(db, collection_name, file_name):
                 result[key] = document[key]
         data.append(result)  # Convert each document to a dictionary
 
-    file_name = "json_collections/" + file_name
+    file_name = f"{file_name}/{file_name}"
     with open(file_name, "w") as json_file:
         json.dump(data, json_file, indent=4, default=str)
 

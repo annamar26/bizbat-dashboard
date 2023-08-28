@@ -150,6 +150,9 @@ yarn-error.log
 .settings/
 *.sublime-workspace
 
+# Venvs
+.venv/
+
 # Visual Studio Code
 .vscode/*
 !.vscode/settings.json

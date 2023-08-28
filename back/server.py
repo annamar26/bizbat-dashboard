@@ -8,11 +8,11 @@ from flask import Flask
 # === GLOBALS ===
 app = Flask(__name__)
 
-@app.route('/endpoint1')
+@app.route('/users/most-followed/')
 def endpoint1():
     return 'This is endpoint 1'
 
-@app.route('/endpoint2')
+@app.route('/users/')
 def endpoint2():
     return 'This is endpoint 2'
 
