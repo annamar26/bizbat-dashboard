@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import Chart from 'chart.js/auto';
+import Chart, { ChartTypeRegistry } from 'chart.js/auto';
 @Component({
   selector: 'app-canva',
   templateUrl: './canva.component.html',
@@ -7,6 +7,7 @@ import Chart from 'chart.js/auto';
 })
 export class CanvaComponent implements OnInit, AfterViewInit{
   @Input() dataSet: Array<Object> = [];
+  @Input() typeChart: any = "bar";
 
   canvas: any;
   ctx: any;
@@ -27,13 +28,15 @@ export class CanvaComponent implements OnInit, AfterViewInit{
     new Chart(
       this.ctx,
       {
-        type: 'doughnut',
+        type: this.typeChart, // 'doughnut',
         data: {
           labels: this.dataSet.map((row: any) => row.year),
           datasets: [
             {
               label: 'Acquisitions by year',
-              data: this.dataSet.map((row: any) => row.count)
+              data: this.dataSet.map((row: any) => row.count),
+              borderColor: '#20269E',
+              backgroundColor: ['#E5399D', '#6742F5', '#20269E', '#0E0821'],
             }
           ]
         }

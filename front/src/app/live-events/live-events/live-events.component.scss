@@ -1,0 +1,21 @@
+.content-charts{
+	padding-top: 1rem;
+	padding-left: .5rem;
+	padding-right: .5rem;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 10px;
+}
+
+.black-color{
+	background-color: #0E0821;
+}
+.blue-color{
+	background-color: #20269E;
+}
+.purple-color{
+	background-color: #6742F5;
+}
+.pink-color{
+	background-color: #E5399D;
+}
