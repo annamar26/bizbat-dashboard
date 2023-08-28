@@ -3,20 +3,27 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { TableViewComponent } from './components/table-view/table-view.component';
-// import { CanvaComponent } from './components/canva/canva.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgChartsModule } from 'ng2-charts';
+import { SelectorComponent } from './components/selector-component/selector-component.component';
+import { ComponentsModule } from './components/components.module';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    TableViewComponent,
-    // CanvaComponent
+   
   ],
   imports: [
+    ComponentsModule,
     BrowserModule,
     AppRoutingModule,
-
+    BrowserAnimationsModule,
+    NgChartsModule,
+    
+  
   ],
   providers: [],
   bootstrap: [AppComponent]
