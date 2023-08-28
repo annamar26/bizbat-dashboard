@@ -5,14 +5,14 @@
 from flask import Flask
 
 # BizBat Dashboard
-from .blueprints import live_events, posts, users
+from blueprints import posts
 
 # === GLOBALS ===
 app = Flask(__name__)
 
-live_events.bp_register_views(app)
+# live_events.bp_register_views(app)
 posts.bp_register_views(app)
-users.bp_register_views(app)
+# users.bp_register_views(app)
 
 
 # === MAIN ===

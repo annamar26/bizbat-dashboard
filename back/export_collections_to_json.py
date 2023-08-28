@@ -16,8 +16,8 @@ class RelevantFields(Enum):
 
 class Collections(RelevantFields):
     users = ('users', ('language', 'profileType', 'username', 'email', 'name', 'hire', 'totalFollowers',
-                       'totalActivePosts', 'createdAt', 'freePremium', 'isPremium', 'totalActivePosts',
-                       'totalInactivePosts', 'country', 'city', 'musicalGenres'))
+                       'createdAt', 'freePremium', 'isPremium', 'totalActivePosts', 'totalInactivePosts',
+                       'country', 'city', 'musicalGenres'))
     posts = ('posts', ('type', 'id', 'url', 'user', 'totalLikes', 'isBlocked', 'isActive', 'totalViews', 'location',
                        'createdAt'))
     live_events = ('live-events', ('eventOwner', 'id', 'price', 'currency', 'artists', 'title', 'genres', 'location',

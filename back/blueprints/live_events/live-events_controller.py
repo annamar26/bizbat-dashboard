@@ -10,7 +10,7 @@ import json
 def obtain_json_data():
     file_directory = os.path.dirname(os.path.abspath(__file__))
     json_path = os.path.join(file_directory, "live-events.json")
-    with open(json_path, 'r') as json_file:
+    with open(json_path, "r") as json_file:
         data = json.load(json_file)
     return data
 
@@ -38,11 +38,10 @@ class LiveEvents:
     def __init__(self):
         data = obtain_json_data()
         self.events = [LiveEvent(
-            item.get('eventOwner'), item.get('id'), item.get('price'),
-            item.get('currency'), item.get('artists'), item.get('title'),
-            item.get('genres'), item.get('location'), item.get('date')) for item in data
+            item.get("eventOwner"), item.get("id"), item.get("price"),
+            item.get("currency"), item.get("artists"), item.get("title"),
+            item.get("genres"), item.get("location"), item.get("date")) for item in data
         ]
-
 
     # Function to get the top N objects based on a specified field
     def get_top_n(objects, field, n):
@@ -51,3 +50,11 @@ class LiveEvents:
         
         # Return the top N objects
         return sorted_objects[:n]
+
+    def get_test(self):
+        return self.events
+
+
+if __name__=="__main__":
+    events = LiveEvents().get_test()
+    print(events)

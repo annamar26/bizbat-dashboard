@@ -3,6 +3,31 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "BizBat Server 2",
+      "type": "python",
+      "request": "launch",
+      "program": "/home/apocz/Documents/Improving/bizbat-dashboard/back/server.py",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "BizBat Server",
+      "type": "python",
+      "request": "launch",
+      "module": "flask",
+      "justMyCode": false,
+      "env": {
+        "FLASK_APP": "back/server.py",
+        "FLASK_DEBUG": "0"
+      },
+      "args": [
+        "run",
+        "--no-debugger",
+        "--no-reload"
+      ],
+      "jinja": true
+    },
+    {
       "name": "ng serve",
       "type": "chrome",
       "request": "launch",
