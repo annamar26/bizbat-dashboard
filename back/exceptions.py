@@ -2,7 +2,8 @@
 
 # === IMPORTS ===
 import logging
-from flask import abort, request
+from flask import abort
+
 
 # === CLASSES ===
 class InvalidDataException(Exception):

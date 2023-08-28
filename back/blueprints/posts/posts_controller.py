@@ -62,8 +62,9 @@ class Posts:
     def get_top_n_of_total_likes(self, n=None):
         posts_with_likes = [post for post in self.posts if post.totalLikes is not None]
         sorted_objects = sorted(posts_with_likes, key=lambda x: getattr(x, "totalLikes"), reverse=True)
+        result = [post.to_dict() for post in sorted_objects]
         
-        return sorted_objects[:n]
+        return result[:n]
 
     def get_top_n_of_total_views(self, n: int):
         posts_with_views = [post for post in self.posts if post.totalViews is not None]
@@ -72,14 +73,14 @@ class Posts:
         
         return result[:n]
 
-
-if __name__=="__main__":
-    posts = Posts()
-    top_5_likes = posts.get_top_n_of_total_likes(5)
-    top_5_views = posts.get_top_n_of_total_views(5)
-    print("-" * 30)
-    for post in top_5_likes:
-        print(post, post.totalLikes)
-    print("-" * 30)
-    for post in top_5_views:
-        print(post, post.totalViews)
+    def get_top_n_of_writers(self, n: int):
+        posts_with_user = [post for post in self.posts if post.totalViews is not None]
+        result = {}
+        for post in posts_with_user:
+            if post.user in result:
+                result[post.user] += 1
+            else:
+                result[post.user] = 1
+        sorted_items = sorted(result.items(), key=lambda x: x[1], reverse=True)
+        top_list = [{"id": key, "total": value} for key, value in sorted_items[:n]]
+        return top_list

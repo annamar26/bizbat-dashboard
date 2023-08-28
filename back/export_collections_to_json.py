@@ -8,20 +8,61 @@ from firebase_admin import credentials as firebase_credentials, firestore
 
 # === GLOBALS ===
 class RelevantFields(Enum):
-
     def __init__(self, collection_name, fields):
         self.collection_name = collection_name
         self.fields = fields
 
 
 class Collections(RelevantFields):
-    users = ('users', ('language', 'profileType', 'username', 'email', 'name', 'hire', 'totalFollowers',
-                       'createdAt', 'freePremium', 'isPremium', 'totalActivePosts', 'totalInactivePosts',
-                       'country', 'city', 'musicalGenres'))
-    posts = ('posts', ('type', 'id', 'url', 'user', 'totalLikes', 'isBlocked', 'isActive', 'totalViews', 'location',
-                       'createdAt'))
-    live_events = ('live-events', ('eventOwner', 'id', 'price', 'currency', 'artists', 'title', 'genres', 'location',
-                                   'date'))
+    users = (
+        "users",
+        (
+            "language",
+            "profileType",
+            "username",
+            "email",
+            "name",
+            "hire",
+            "totalFollowers",
+            "createdAt",
+            "freePremium",
+            "isPremium",
+            "totalActivePosts",
+            "totalInactivePosts",
+            "country",
+            "city",
+            "musicalGenres",
+        ),
+    )
+    posts = (
+        "posts",
+        (
+            "type",
+            "id",
+            "url",
+            "user",
+            "totalLikes",
+            "isBlocked",
+            "isActive",
+            "totalViews",
+            "location",
+            "createdAt",
+        ),
+    )
+    live_events = (
+        "live-events",
+        (
+            "eventOwner",
+            "id",
+            "price",
+            "currency",
+            "artists",
+            "title",
+            "genres",
+            "location",
+            "date",
+        ),
+    )
 
     @staticmethod
     def get_collection_names():
@@ -37,13 +78,15 @@ class Collections(RelevantFields):
             if collection.collection_name == collection_name:
                 return collection.fields
 
-        raise ValueError('Collection {} not found on ENUM'.format(collection_name))
+        raise ValueError("Collection {} not found on ENUM".format(collection_name))
 
 
 # === FUNCTIONS ===
 def get_credentials_path():
     script_directory = os.path.dirname(os.path.abspath(__file__))
-    credentials_path = os.path.join(script_directory, "credentials/service_account.json")
+    credentials_path = os.path.join(
+        script_directory, "credentials/service_account.json"
+    )
 
     return credentials_path
 
@@ -76,7 +119,7 @@ def write_data_from_collection(db, collection_name, file_name):
 def main():
     db = get_firestore_client()
     for collection_name in Collections.get_collection_names():
-        file_name = collection_name + '.json'
+        file_name = collection_name + ".json"
         write_data_from_collection(db, collection_name, file_name)
 
 
