@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LiveEventsComponent } from './live-events/live-events.component';
 import { LiveEventRoutingModule } from './live-events.routes';
+import { ComponentsModule } from '../components/components.module';
+import { LiveEventService } from '../services/live-event-service';
 
 
 
@@ -11,8 +13,12 @@ import { LiveEventRoutingModule } from './live-events.routes';
   ],
   imports: [
     CommonModule,
-    LiveEventRoutingModule
+    LiveEventRoutingModule,
+    ComponentsModule,
   ],
+  providers: [
+    LiveEventService
+  ]
   // exports:[
   //   LiveEventsComponent
   // ]

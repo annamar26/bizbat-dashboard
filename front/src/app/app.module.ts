@@ -4,14 +4,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { TableViewComponent } from './components/table-view/table-view.component';
-import { CanvaComponent } from './components/canva/canva.component';
+// import { CanvaComponent } from './components/canva/canva.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     TableViewComponent,
-    CanvaComponent
+    // CanvaComponent
   ],
   imports: [
     BrowserModule,
