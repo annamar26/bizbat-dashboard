@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { LiveEventService } from 'src/app/services/live-event-service';
 
 @Component({
   selector: 'app-live-events',
@@ -7,10 +8,12 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 })
 export class LiveEventsComponent implements OnInit{
 
-  constructor() {}
+  public listData: Array<object> = [];
+
+  constructor(private _liveEventsService: LiveEventService) {}
 
   ngOnInit() {
-    console.log("test...");
+    this.listData = this._liveEventsService.getData();
   }
 
 }

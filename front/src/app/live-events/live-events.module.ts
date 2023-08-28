@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LiveEventsComponent } from './live-events/live-events.component';
 import { LiveEventRoutingModule } from './live-events.routes';
 import { ComponentsModule } from '../components/components.module';
+import { LiveEventService } from '../services/live-event-service';
 
 
 
@@ -15,6 +16,9 @@ import { ComponentsModule } from '../components/components.module';
     LiveEventRoutingModule,
     ComponentsModule,
   ],
+  providers: [
+    LiveEventService
+  ]
   // exports:[
   //   LiveEventsComponent
   // ]
