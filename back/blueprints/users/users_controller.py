@@ -16,7 +16,7 @@ def obtain_json_data():
 
 
 # === CLASSES ===
-class LiveEvent:
+class User:
     def __init__(
         self,
         language,
@@ -54,12 +54,37 @@ class LiveEvent:
     def __str__(self):
         return f"{self.profileType}: {self.hire}"
 
+    def to_dict(self):
+        return {
+            "language": self.language,
+            "profileType": self.profileType,
+            "username": self.username,
+            "email": self.email,
+            "name": self.name,
+            "hire": self.hire,
+            "totalFollowers": self.totalFollowers,
+            "createdAt": self.createdAt,
+            "freePremium": self.freePremium,
+            "isPremium": self.isPremium,
+            "totalActivePosts": self.totalActivePosts,
+            "totalInactivePosts": self.totalInactivePosts,
+            "country": self.country,
+            "city": self.city,
+            "musicalGenres": self.musicalGenres
+        }
 
-class LiveEvents:
+    def to_dict_followers(self):
+        return {
+            "id": self.username,
+            "total": self.totalFollowers,
+        }
+
+
+class Users:
     def __init__(self):
         data = obtain_json_data()
-        self.events = [
-            LiveEvent(
+        self.users = [
+            User(
                 language=item.get("language"),
                 profileType=item.get("profileType"),
                 username=item.get("username"),
@@ -74,23 +99,37 @@ class LiveEvents:
                 totalInactivePosts=item.get("totalInactivePosts"),
                 country=item.get("country"),
                 city=item.get("city"),
-                musicalGenre=item.get("musicalGenres"),
+                musicalGenres=item.get("musicalGenres"),
             )
             for item in data
         ]
 
-    # Function to get the top N objects based on a specified field
-    def get_top_n(objects, field, n):
-        # Sort the objects based on the specified field in descending order
-        sorted_objects = sorted(objects, key=lambda x: getattr(x, field), reverse=True)
+    def get_top_n_of_total_followers(self, n: int):
+        users_with_followers = [user for user in self.users if user.totalFollowers is not None]
+        sorted_objects = sorted(
+            users_with_followers, key=lambda x: getattr(x, "totalFollowers"), reverse=True
+        )
+        result = [post.to_dict_followers() for post in sorted_objects]
 
-        # Return the top N objects
-        return sorted_objects[:n]
+        return result[:n]
 
-    def get_test(self):
-        return self.events
+    def get_premiums(self):
+        users_with_premium = len([user for user in self.users if user.isPremium])
+        users_with_free_premium = len([user for user in self.users if user.freePremium])
+        users_without_premium = len([user for user in self.users if not user.isPremium])
+        result = [
+            {
+                "id": "users_with_premium",
+                "total": users_with_premium
+            },
+            {
+                "id": "users_with_free_premium",
+                "total": users_with_free_premium
+            },
+            {
+                "id": "users_without_premium",
+                "total": users_without_premium
+            },
+        ]
 
-
-if __name__ == "__main__":
-    events = LiveEvents().get_test()
-    print(events)
+        return result
