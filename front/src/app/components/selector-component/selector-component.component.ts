@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { MatSelectChange } from '@angular/material/select';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { NavigationEnd, Router } from '@angular/router';
+
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-selector-component',
@@ -12,9 +13,7 @@ export class SelectorComponent{
   selectedOption!: string
   options: { label: string; value: string }[] = [];
 
-  private optionSubject = new BehaviorSubject<string>('');
-
-  constructor(private router: Router) {
+  constructor(private router: Router, private dataService: DataService) {
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -26,7 +25,7 @@ export class SelectorComponent{
   }
 
   optionSelected(event: MatSelectChange) {
-    this.optionSubject.next(event.value);
+    this.dataService.optionSubject.next(event.value);
     this.selectedOption = event.value
   }
 

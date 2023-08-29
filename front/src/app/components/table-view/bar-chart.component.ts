@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Renderer2 } from '@angular/core';
+import { Component, Input, OnInit, Renderer2, SimpleChanges } from '@angular/core';
 import { Chart } from 'chart.js';
 import { DataService } from 'src/app/services/data.service';
 @Component({
@@ -6,40 +6,44 @@ import { DataService } from 'src/app/services/data.service';
   templateUrl: './bar-chart.component.html',
   styleUrls: ['./bar-chart.component.scss']
 })
-export class TableViewComponent {
+export class BarChartComponent {
   barChart!: Chart;
   @Input() label: string ='views';
+  @Input() users!: any[];
 
-  constructor( public renderer: Renderer2){}
 
-  users = [
-    {
-      id: '1',
-      username: 'user1',
-      totalFollowers: 10,
+  constructor( public renderer: Renderer2, private dataService: DataService){
 
-    },
-    {
-      id: '2',
-      username: 'user2',
-      totalFollowers: 25,
-
-    },
-  
-  ];
-
-  ngOnInit(): void {
-    this.createBarChart();
   }
 
+  ngOnInit(): void {
+this.dataService.optionSubject.subscribe(res=>{
+    this.label = res
+    console.log(this.label)
+  })
+
+
+  }
+
+  ngOnChanges(changes: SimpleChanges): void{
+  this.users = changes?.['users'].currentValue
+
+  this.createBarChart()
+}
+
   createBarChart() {
+
+    if (this.barChart) {
+      this.barChart.destroy();
+  }
     const canvas: HTMLCanvasElement = this.renderer.selectRootElement('.barChartCanvas')
     const ctx = canvas.getContext('2d');
     const colors = ['#E5399D', '#6742F5', '#20269E', '#0E0821']
 
     if (ctx) {
-      const userLabels = this.users.map(user => `${user.username}- ${user.id}`);
-      const userFollowers = this.users.map(user => user.totalFollowers);
+ 
+      const userLabels = this.users.map((user: any) => user.id);
+      const userFollowers = this.users.map((user: any) => user.total);
       const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
 
       // colors.forEach((color: string, index: number) =>  {gradient.addColorStop(index, color)})

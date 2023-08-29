@@ -4,6 +4,7 @@ import { CanvaComponent } from './canva/canva.component';
 import { SelectorComponent } from './selector-component/selector-component.component';
 import { MatSelectModule } from '@angular/material/select';
 import { DataService } from '../services/data.service';
+import { BarChartComponent } from './table-view/bar-chart.component';
 
 
 
@@ -12,16 +13,18 @@ import { DataService } from '../services/data.service';
   declarations: [
     CanvaComponent,
     SelectorComponent,
+    BarChartComponent
   ],
   imports: [
     CommonModule,
-  MatSelectModule
+    MatSelectModule
   //   LiveEventRoutingModule
   ],
   exports:[
     SelectorComponent,
-    CanvaComponent
+    CanvaComponent,
+    BarChartComponent
   ],
- 
+
 })
 export class ComponentsModule { }
