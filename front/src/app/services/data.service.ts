@@ -6,13 +6,14 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DataService {
-  baseUrl = 'http://localhost:6001'
+  port = 5000; //6001;
+  baseUrl = 'http://localhost'
   path =''
   optionSubject = new BehaviorSubject<string>('/users/top_followers/');
   constructor(private http: HttpClient ) { }
 
   getDummy(path: string): Observable<any>{
-   return this.http.get(this.baseUrl+path)
+   return this.http.get(`${this.baseUrl}:${this.port}${path}`)
   }
 
   getData(){
