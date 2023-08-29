@@ -17,7 +17,7 @@ import { BarChartComponent } from './table-view/bar-chart.component';
   ],
   imports: [
     CommonModule,
-  MatSelectModule
+    MatSelectModule
   //   LiveEventRoutingModule
   ],
   exports:[
@@ -25,6 +25,6 @@ import { BarChartComponent } from './table-view/bar-chart.component';
     CanvaComponent,
     BarChartComponent
   ],
- 
+
 })
 export class ComponentsModule { }
