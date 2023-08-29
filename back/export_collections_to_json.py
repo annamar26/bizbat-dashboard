@@ -8,13 +8,15 @@ from firebase_admin import credentials as firebase_credentials, firestore
 
 # === GLOBALS ===
 class RelevantFields(Enum):
-    def __init__(self, collection_name, fields):
+    def __init__(self, collection_name, file_name ,fields):
         self.collection_name = collection_name
+        self.file_name = file_name
         self.fields = fields
 
 
 class Collections(RelevantFields):
     users = (
+        "users",
         "users",
         (
             "language",
@@ -36,6 +38,7 @@ class Collections(RelevantFields):
     )
     posts = (
         "posts",
+        "posts",
         (
             "type",
             "id",
@@ -50,6 +53,7 @@ class Collections(RelevantFields):
         ),
     )
     live_events = (
+        "live-events",
         "live_events",
         (
             "eventOwner",
@@ -69,6 +73,14 @@ class Collections(RelevantFields):
         collection_names = []
         for collection in Collections:
             collection_names.append(collection.collection_name)
+
+        return collection_names
+
+    @staticmethod
+    def get_file_names():
+        collection_names = []
+        for collection in Collections:
+            collection_names.append(collection.file_name)
 
         return collection_names
 
@@ -111,16 +123,15 @@ def write_data_from_collection(db, collection_name, file_name):
                 result[key] = document[key]
         data.append(result)  # Convert each document to a dictionary
 
-    file_name = f"blueprints/{collection_name}/{file_name}"
+    file_name = f"blueprints/{file_name}/{file_name}.json"
     with open(file_name, "w") as json_file:
         json.dump(data, json_file, indent=4, default=str)
 
 
 def main():
     db = get_firestore_client()
-    for collection_name in Collections.get_collection_names():
-        file_name = collection_name + ".json"
-        write_data_from_collection(db, collection_name, file_name)
+    for enum in Collections:
+        write_data_from_collection(db, enum.collection_name, enum.file_name)
 
 
 # === MAIN ===
