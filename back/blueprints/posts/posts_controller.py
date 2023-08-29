@@ -64,16 +64,16 @@ class Posts:
         data = obtain_json_data()
         self.posts = [
             Post(
-                type=item.get("type"),
-                id=item.get("id"),
-                url=item.get("url"),
-                user=item.get("user"),
-                totalLikes=item.get("totalLikes"),
-                isBlocked=item.get("isBlocked"),
-                isActive=item.get("isActive"),
-                totalViews=item.get("totalViews"),
-                location=item.get("location"),
-                date=item.get("date"),
+                type = item.get("type"),
+                id = item.get("id"),
+                url = item.get("url"),
+                user = item.get("user"),
+                totalLikes = item.get("totalLikes"),
+                isBlocked = item.get("isBlocked"),
+                isActive = item.get("isActive"),
+                totalViews = item.get("totalViews"),
+                location = item.get("location"),
+                date = item.get("date"),
             )
             for item in data
         ]
@@ -92,9 +92,9 @@ class Posts:
         sorted_objects = sorted(
             posts_with_views, key=lambda x: getattr(x, "totalViews"), reverse=True
         )
-        result = [post.to_dict() for post in sorted_objects]
+        top_list = [post.to_dict() for post in sorted_objects[:n]]
 
-        return result[:n]
+        return top_list
 
     def get_top_n_of_writers(self, n: int):
         posts_with_user = [post for post in self.posts if post.totalViews is not None]
@@ -106,4 +106,5 @@ class Posts:
                 result[post.user] = 1
         sorted_items = sorted(result.items(), key=lambda x: x[1], reverse=True)
         top_list = [{"id": key, "total": value} for key, value in sorted_items[:n]]
+
         return top_list

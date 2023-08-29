@@ -13,7 +13,7 @@ from utils import convert_data
 
 
 # === CLASSES ===
-# /top-views/
+# /top_views/
 class PostsTopViews(MethodView):
     def __init__(self):
         super().__init__()
