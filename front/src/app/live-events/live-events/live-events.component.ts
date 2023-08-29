@@ -13,10 +13,14 @@ export class LiveEventsComponent {
   path?: string;
 
   constructor(private _dataService: DataService) {
-    this._dataService.liveEventsSubject.subscribe(path => {
+    this._dataService.optionSubject.subscribe(path => {
       this.path = path;
       this.getData();
     })
+  }
+
+  ngOnInit(): void {
+    this._dataService.optionSubject.next('/live_events/top_expensive/')
   }
 
   getData(): void {

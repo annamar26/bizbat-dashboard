@@ -13,7 +13,7 @@ import { DataService } from 'src/app/services/data.service';
   templateUrl: './bar-chart.component.html',
   styleUrls: ['./bar-chart.component.scss'],
 })
-export class BarChartComponent implements OnDestroy{
+export class BarChartComponent implements OnDestroy {
   barChart!: Chart;
   @Input() label: string = 'views';
   @Input() data!: any[];
@@ -53,57 +53,60 @@ export class BarChartComponent implements OnDestroy{
       const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
       console.log('label', this.label);
 
-      // colors.forEach((color: string, index: number) =>  {gradient.addColorStop(index, color)})
-
-      this.barChart = new Chart(ctx, {
-        type: this.label.includes('top')
-          ? 'bar'
-          : ('pie' as keyof ChartTypeRegistry),
-        data: {
-          labels: userLabels,
-          datasets: [
-            {
-              label: `Total ${this.label}`,
-              data: userFollowers,
-              backgroundColor: colors,
-              borderColor: '#20269E',
-              borderWidth: 2, // Grosor del borde
-              borderRadius: 10,
-              hoverBorderColor: '#6742F5', // Cambia el color del borde al pasar el cursor
-              hoverBorderWidth: 2,
-            },
-          ],
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true,
-              title: {
-                display: true,
-                text: `Total ${this.label}`,
+      try {
+        // colors.forEach((color: string, index: number) =>  {gradient.addColorStop(index, color)})
+        this.barChart = new Chart(ctx, {
+          type: this.label.includes('top')
+            ? 'bar'
+            : ('pie' as keyof ChartTypeRegistry),
+          data: {
+            labels: userLabels,
+            datasets: [
+              {
+                label: `Total ${this.label}`,
+                data: userFollowers,
+                backgroundColor: colors,
+                borderColor: '#20269E',
+                borderWidth: 2, // Grosor del borde
+                borderRadius: 10,
+                hoverBorderColor: '#6742F5', // Cambia el color del borde al pasar el cursor
+                hoverBorderWidth: 2,
               },
-            },
-            x: {
-              grid: {
-                display: true, // Desactiva las líneas de la cuadrícula horizontal
-              },
-            },
+            ],
           },
-          plugins: {
-            legend: {
-              display: true, // Cambia a false si no deseas mostrar la leyenda
-              position: 'bottom', // Puede ser 'top', 'bottom', 'left', 'right'
-              labels: {
-                boxPadding: 16,
-                font: {
-                  size: 16, // Cambia el tamaño de la fuente de la leyenda
-                  weight: 'bold', // Cambia el peso de la fuente de la leyenda
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true,
+                title: {
+                  display: true,
+                  text: `Total ${this.label}`,
+                },
+              },
+              x: {
+                grid: {
+                  display: true, // Desactiva las líneas de la cuadrícula horizontal
+                },
+              },
+            },
+            plugins: {
+              legend: {
+                display: true, // Cambia a false si no deseas mostrar la leyenda
+                position: 'bottom', // Puede ser 'top', 'bottom', 'left', 'right'
+                labels: {
+                  boxPadding: 16,
+                  font: {
+                    size: 16, // Cambia el tamaño de la fuente de la leyenda
+                    weight: 'bold', // Cambia el peso de la fuente de la leyenda
+                  },
                 },
               },
             },
           },
-        },
-      });
+        });
+      } catch (error) {
+        console.log('ERROR: ', error);
+      }
     } else {
       console.error('No se pudo obtener el contexto del lienzo.');
     }

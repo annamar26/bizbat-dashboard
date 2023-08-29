@@ -22,24 +22,25 @@ export class SelectorComponent{
        console.log(this.selectedOption)
       }
     });
- 
+
   }
 
   optionSelected(event: MatSelectChange) {
     this.dataService.optionSubject.next(event.value);
     this.selectedOption = event.value
-    
+
   }
 
   private updateOptions(segment: string) {
     if (segment === '/users') {
       this.options = [
-        { label: 'Total Followers', value: '/users/top_followers/' },      
+        { label: 'Total Followers', value: '/users/top_followers/' },
         { label: 'Premium Users', value: '/users/premiums/' }
       ];
     } else if (segment === '/live-events') {
       this.options = [
-        { label: 'Price Max', value: 'price-max' }
+        { label: 'Price Max', value: '/live_events/top_expensive/' },
+        { label: 'Price Min', value: '/live_events/top_cheap/' },
       ];
     } else if (segment === '/posts') {
       this.options = [
@@ -48,7 +49,7 @@ export class SelectorComponent{
         { label: 'Top Writers', value: '/posts/top_writers/' }
       ];
     }
-   
+
   }
 }
 

@@ -10,15 +10,10 @@ export class DataService {
   baseUrl = 'http://localhost'
   path =''
   optionSubject = new BehaviorSubject<string>('/users/top_followers/');
-  liveEventsSubject = new BehaviorSubject<string>('/live_events/top_expensive/');
   constructor(private http: HttpClient ) { }
 
   getDummy(path: string): Observable<any>{
    return this.http.get(`${this.baseUrl}:${this.port}${path}`)
-  }
-
-  getLiveEvents(path: string): Observable<any>{
-    return this.http.get(`${this.baseUrl}:${this.port}${path}`)
   }
 
   getData(){
