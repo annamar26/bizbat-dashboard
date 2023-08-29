@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -6,10 +6,18 @@ import { DataService } from 'src/app/services/data.service';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-export class UsersComponent {
+export class UsersComponent implements OnInit{
+  users: any =[]
 constructor(private dataService: DataService){
-this.dataService.getDummy().subscribe(res=>{
-  console.log(res)
-})
+
+
+
+
 }
+  ngOnInit(): void {
+    this.dataService.getDummy().subscribe((res: any)=>{
+      this.users = res
+      console.log(this.users)
+  })}
+
 }

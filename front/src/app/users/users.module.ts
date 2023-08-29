@@ -1,18 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersComponent } from './users/users.component';
-import { TableViewComponent } from '../components/table-view/bar-chart.component';
 import { UsersRoutingModule } from './users.routes';
+import { ComponentsModule } from '../components/components.module';
 
 
 
 @NgModule({
   declarations: [
     UsersComponent,
-    TableViewComponent
+    
   ],
   imports: [
     CommonModule,
+    ComponentsModule,
     UsersRoutingModule
   ]
 })
