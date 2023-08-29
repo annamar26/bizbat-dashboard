@@ -50,7 +50,7 @@ class Collections(RelevantFields):
         ),
     )
     live_events = (
-        "live-events",
+        "live_events",
         (
             "eventOwner",
             "id",

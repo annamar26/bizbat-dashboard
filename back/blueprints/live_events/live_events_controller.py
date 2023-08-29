@@ -9,7 +9,7 @@ import json
 # === FUNCTIONS ===
 def obtain_json_data():
     file_directory = os.path.dirname(os.path.abspath(__file__))
-    json_path = os.path.join(file_directory, "live-events.json")
+    json_path = os.path.join(file_directory, "live_events.json")
     with open(json_path, "r") as json_file:
         data = json.load(json_file)
     return data
