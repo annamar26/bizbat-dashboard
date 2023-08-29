@@ -45,10 +45,7 @@ class Post:
         return f"{self.oid}: {self.user}"
 
     def to_dict_custom(self, field):
-        return {
-            "id": self.oid,
-            "total": getattr(self, field)
-        }
+        return {"id": self.oid, "total": getattr(self, field)}
 
 
 class Posts:
@@ -56,16 +53,16 @@ class Posts:
         data = obtain_json_data()
         self.posts = [
             Post(
-                type = item.get("type"),
-                id = item.get("id"),
-                url = item.get("url"),
-                user = item.get("user"),
-                totalLikes = item.get("totalLikes"),
-                isBlocked = item.get("isBlocked"),
-                isActive = item.get("isActive"),
-                totalViews = item.get("totalViews"),
-                location = item.get("location"),
-                date = item.get("date"),
+                type=item.get("type"),
+                id=item.get("id"),
+                url=item.get("url"),
+                user=item.get("user"),
+                totalLikes=item.get("totalLikes"),
+                isBlocked=item.get("isBlocked"),
+                isActive=item.get("isActive"),
+                totalViews=item.get("totalViews"),
+                location=item.get("location"),
+                date=item.get("date"),
             )
             for item in data
         ]
