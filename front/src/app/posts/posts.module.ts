@@ -1,12 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { PostsComponent } from './posts/posts.component';
+import { PostsRoutingModule } from './posts.routes';
+import { ComponentsModule } from '../components/components.module';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    PostsComponent
+  ],
   imports: [
-    CommonModule
+    CommonModule,
+    ComponentsModule,
+    PostsRoutingModule
   ]
 })
 export class PostsModule { }

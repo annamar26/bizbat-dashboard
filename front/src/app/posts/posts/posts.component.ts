@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss']
+  selector: 'app-posts',
+  templateUrl: './posts.component.html',
+  styleUrls: ['./posts.component.scss']
 })
-export class UsersComponent{
-  users: any =[]
+export class PostsComponent {
+  posts: any =[]
   path?: string
 constructor(private dataService: DataService){
   this.dataService.optionSubject.subscribe(path=> {
@@ -25,8 +25,7 @@ constructor(private dataService: DataService){
 
     
     this.dataService.getDummy(this.path!).subscribe((res: any)=>{
-      this.users = res
-      console.log(this.users)
+      this.posts = res
+      console.log(this.posts)
   })}
-
 }
