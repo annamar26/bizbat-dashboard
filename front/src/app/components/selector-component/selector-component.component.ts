@@ -19,6 +19,7 @@ export class SelectorComponent{
       if (event instanceof NavigationEnd) {
        this.updateOptions(event.url)
        this.selectedOption = this.options[0].value
+       console.log(this.selectedOption)
       }
     });
  
@@ -33,9 +34,7 @@ export class SelectorComponent{
   private updateOptions(segment: string) {
     if (segment === '/users') {
       this.options = [
-        { label: 'Total Followers', value: '/users/top_followers/' },
-        { label: 'Profile Types', value: '/users/profile-types/' },
-        { label: 'Language', value: '/users/language/' },
+        { label: 'Total Followers', value: '/users/top_followers/' },      
         { label: 'Premium Users', value: '/users/premiums/' }
       ];
     } else if (segment === '/live-events') {
@@ -49,6 +48,7 @@ export class SelectorComponent{
         { label: 'Top Writers', value: '/posts/top_writers/' }
       ];
     }
+   
   }
 }
 
