@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CanvaComponent } from './canva/canva.component';
 import { SelectorComponent } from './selector-component/selector-component.component';
 import { MatSelectModule } from '@angular/material/select';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
@@ -10,7 +9,7 @@ import { BarChartComponent } from './bar-chart/bar-chart.component';
 
 @NgModule({
   declarations: [
-    CanvaComponent,
+
     SelectorComponent,
     BarChartComponent
   ],
@@ -21,7 +20,7 @@ import { BarChartComponent } from './bar-chart/bar-chart.component';
   ],
   exports:[
     SelectorComponent,
-    CanvaComponent,
+
     BarChartComponent
   ],
 
