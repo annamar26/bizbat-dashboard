@@ -33,10 +33,10 @@ class LiveEvent:
     def __str__(self):
         return f"{self.oid}: {self.title}"
 
-    def to_dict_expensive(self):
+    def to_dict_price_custom(self, field):
         return {
             "id": self.oid,
-            "total": self.price['to']
+            "total": self.price[field]
         }
 
 
@@ -58,11 +58,20 @@ class LiveEvents:
             for item in data
         ]
 
-
     def get_top_n_more_expensive(self, n):
         events_with_max_price = [event for event in self.events if event.price and event.price.get('to')]
         sorted_objects = sorted(
             events_with_max_price, key=lambda x: x.price["to"], reverse=True
         )
-        top_list = [event.to_dict_expensive() for event in sorted_objects[:n]]
+        top_list = [event.to_dict_price_custom('to') for event in sorted_objects[:n]]
+
+        return top_list
+
+    def get_top_n_cheaper(self, n):
+        events_with_max_price = [event for event in self.events if event.price and event.price.get('from')]
+        sorted_objects = sorted(
+            events_with_max_price, key=lambda x: x.price["from"]
+        )
+        top_list = [event.to_dict_price_custom('from') for event in sorted_objects[:n]]
+
         return top_list

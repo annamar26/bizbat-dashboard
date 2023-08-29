@@ -44,18 +44,10 @@ class Post:
     def __str__(self):
         return f"{self.oid}: {self.user}"
 
-    def to_dict(self):
+    def to_dict_custom(self, field):
         return {
-            "type": self.type,
             "id": self.oid,
-            "url": self.url,
-            "user": self.user,
-            "totalLikes": self.totalLikes,
-            "isBlocked": self.isBlocked,
-            "isActive": self.isActive,
-            "totalViews": self.totalViews,
-            "location": self.location,
-            "date": self.date,
+            "total": getattr(self, field)
         }
 
 
@@ -83,7 +75,7 @@ class Posts:
         sorted_objects = sorted(
             posts_with_likes, key=lambda x: getattr(x, "totalLikes"), reverse=True
         )
-        result = [post.to_dict() for post in sorted_objects]
+        result = [post.to_dict_custom("totalLikes") for post in sorted_objects]
 
         return result[:n]
 
@@ -92,7 +84,7 @@ class Posts:
         sorted_objects = sorted(
             posts_with_views, key=lambda x: getattr(x, "totalViews"), reverse=True
         )
-        top_list = [post.to_dict() for post in sorted_objects[:n]]
+        top_list = [post.to_dict_custom("totalViews") for post in sorted_objects[:n]]
 
         return top_list
 

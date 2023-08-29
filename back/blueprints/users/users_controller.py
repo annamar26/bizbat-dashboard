@@ -73,10 +73,10 @@ class User:
             "musicalGenres": self.musicalGenres
         }
 
-    def to_dict_followers(self):
+    def to_dict_custom(self, field):
         return {
             "id": self.username,
-            "total": self.totalFollowers,
+            "total": getattr(self, field)
         }
 
 
@@ -85,21 +85,21 @@ class Users:
         data = obtain_json_data()
         self.users = [
             User(
-                language=item.get("language"),
-                profileType=item.get("profileType"),
-                username=item.get("username"),
-                email=item.get("email"),
-                name=item.get("name"),
-                hire=item.get("hire"),
-                totalFollowers=item.get("totalFollowers"),
-                createdAt=item.get("createdAt"),
-                freePremium=item.get("freePremium"),
-                isPremium=item.get("isPremium"),
-                totalActivePosts=item.get("totalActivePosts"),
-                totalInactivePosts=item.get("totalInactivePosts"),
-                country=item.get("country"),
-                city=item.get("city"),
-                musicalGenres=item.get("musicalGenres"),
+                language = item.get("language"),
+                profileType = item.get("profileType"),
+                username = item.get("username"),
+                email = item.get("email"),
+                name = item.get("name"),
+                hire = item.get("hire"),
+                totalFollowers = item.get("totalFollowers"),
+                createdAt = item.get("createdAt"),
+                freePremium = item.get("freePremium"),
+                isPremium = item.get("isPremium"),
+                totalActivePosts = item.get("totalActivePosts"),
+                totalInactivePosts = item.get("totalInactivePosts"),
+                country = item.get("country"),
+                city = item.get("city"),
+                musicalGenres = item.get("musicalGenres"),
             )
             for item in data
         ]
@@ -109,7 +109,7 @@ class Users:
         sorted_objects = sorted(
             users_with_followers, key=lambda x: getattr(x, "totalFollowers"), reverse=True
         )
-        top_list = [post.to_dict_followers() for post in sorted_objects[:n]]
+        top_list = [post.to_dict_custom("totalFollowers") for post in sorted_objects[:n]]
 
         return top_list
 

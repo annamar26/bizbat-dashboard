@@ -36,3 +36,28 @@ class LiveEventsTopMostExpensive(MethodView):
         except Exception as ex:
             eh = ExceptionHandler()
             return eh.handle(ex)
+
+
+# /top_cheap/
+class LiveEventsTopCheapest(MethodView):
+    def __init__(self):
+        super().__init__()
+        self.logger = logging.getLogger(type(self).__name__)
+
+    def get(self):
+        # Grab the logs and push to a controller.
+        controller = LiveEvents()
+        try:
+            items = int(request.args.get("items")) if request.args.get("items") else 10
+            users = controller.get_top_n_cheaper(items)
+            response = make_response(convert_data(users, "application/json"), 200)
+            response.headers.add('Access-Control-Allow-Origin', '*')
+            return response
+        except ValueError as ex:
+            eh = ExceptionHandler()
+            return eh.handle(
+                InvalidDataException("'items' parameter must be an integer.")
+            )
+        except Exception as ex:
+            eh = ExceptionHandler()
+            return eh.handle(ex)
