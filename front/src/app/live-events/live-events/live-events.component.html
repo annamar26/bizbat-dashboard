@@ -1,15 +1,9 @@
 <div class="content-charts">
-<app-canva
-	[dataSet]="listData" [typeChart]="'radar'"></app-canva>
-<app-canva
-	[dataSet]="listData" [typeChart]="'polarArea'"></app-canva>
-<app-canva
-	[dataSet]="listData" [typeChart]="'doughnut'"></app-canva>
+<app-bar-chart
+	[data]="listData"></app-bar-chart>
+<app-bar-chart
+	[data]="listData"></app-bar-chart>
+<app-bar-chart
+	[data]="listData"></app-bar-chart>
 
-<!-- <app-canva
-	[dataSet]="listData" [typeChart]="'line'"></app-canva>
-<app-canva
-	[dataSet]="listData" [typeChart]="'bubble'"></app-canva>
-<app-canva
-	[dataSet]="listData" [typeChart]="'pie'"></app-canva> -->
 </div>
