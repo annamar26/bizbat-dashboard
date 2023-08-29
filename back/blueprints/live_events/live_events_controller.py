@@ -33,37 +33,36 @@ class LiveEvent:
     def __str__(self):
         return f"{self.oid}: {self.title}"
 
+    def to_dict_expensive(self):
+        return {
+            "id": self.oid,
+            "total": self.price['to']
+        }
+
 
 class LiveEvents:
     def __init__(self):
         data = obtain_json_data()
         self.events = [
             LiveEvent(
-                eventOwner=item.get("eventOwner"),
-                oid=item.get("id"),
-                price=item.get("price"),
-                currency=item.get("currency"),
-                artists=item.get("artists"),
-                title=item.get("title"),
-                genres=item.get("genres"),
-                location=item.get("location"),
-                date=item.get("date"),
+                eventOwner = item.get("eventOwner"),
+                id = item.get("id"),
+                price = item.get("price"),
+                currency = item.get("currency"),
+                artists = item.get("artists"),
+                title = item.get("title"),
+                genres = item.get("genres"),
+                location = item.get("location"),
+                date = item.get("date"),
             )
             for item in data
         ]
 
-    # Function to get the top N objects based on a specified field
-    def get_top_n(objects, field, n):
-        # Sort the objects based on the specified field in descending order
-        sorted_objects = sorted(objects, key=lambda x: getattr(x, field), reverse=True)
 
-        # Return the top N objects
-        return sorted_objects[:n]
-
-    def get_test(self):
-        return self.events
-
-
-if __name__ == "__main__":
-    events = LiveEvents().get_test()
-    print(events)
+    def get_top_n_more_expensive(self, n):
+        events_with_max_price = [event for event in self.events if event.price and event.price.get('to')]
+        sorted_objects = sorted(
+            events_with_max_price, key=lambda x: x.price["to"], reverse=True
+        )
+        top_list = [event.to_dict_expensive() for event in sorted_objects[:n]]
+        return top_list

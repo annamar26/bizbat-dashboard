@@ -109,9 +109,9 @@ class Users:
         sorted_objects = sorted(
             users_with_followers, key=lambda x: getattr(x, "totalFollowers"), reverse=True
         )
-        result = [post.to_dict_followers() for post in sorted_objects]
+        top_list = [post.to_dict_followers() for post in sorted_objects[:n]]
 
-        return result[:n]
+        return top_list
 
     def get_premiums(self):
         users_with_premium = len([user for user in self.users if user.isPremium])
