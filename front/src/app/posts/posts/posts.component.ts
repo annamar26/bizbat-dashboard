@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -6,13 +6,14 @@ import { DataService } from 'src/app/services/data.service';
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.scss']
 })
-export class PostsComponent {
+export class PostsComponent implements OnInit {
   posts: any =[]
   path?: string
 constructor(private dataService: DataService){
   this.dataService.optionSubject.subscribe(path=> {
 
     this.path = path
+    console.log('holi', this.path)
     this.getData()
 
   })
@@ -21,6 +22,10 @@ constructor(private dataService: DataService){
 
 
 }
+  ngOnInit(): void {
+   this.dataService.optionSubject.next('/posts/top_views/')
+  }
+
   getData(): void {
 
     
@@ -28,4 +33,5 @@ constructor(private dataService: DataService){
       this.posts = res
       console.log(this.posts)
   })}
+  
 }
