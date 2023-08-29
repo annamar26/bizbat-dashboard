@@ -27,15 +27,16 @@ export class SelectorComponent{
   optionSelected(event: MatSelectChange) {
     this.dataService.optionSubject.next(event.value);
     this.selectedOption = event.value
+    
   }
 
   private updateOptions(segment: string) {
     if (segment === '/users') {
       this.options = [
-        { label: 'Total Followers', value: 'total-followers' },
-        { label: 'Profile Types', value: 'profile-types' },
-        { label: 'Language', value: 'language' },
-        { label: 'Premium Users', value: 'premium-users' }
+        { label: 'Total Followers', value: '/users/top_followers/' },
+        { label: 'Profile Types', value: '/users/profile-types/' },
+        { label: 'Language', value: '/users/language/' },
+        { label: 'Premium Users', value: '/users/premiums/' }
       ];
     } else if (segment === '/live-events') {
       this.options = [
@@ -43,9 +44,9 @@ export class SelectorComponent{
       ];
     } else if (segment === '/posts') {
       this.options = [
-        { label: 'Top Views', value: 'top-views' },
-        { label: 'Top Likes', value: 'top-likes' },
-        { label: 'Top Writers', value: 'top-writers' }
+        { label: 'Top Views', value: '/posts/top_views/' },
+        { label: 'Top Likes', value: '/posts/top_likes/' },
+        { label: 'Top Writers', value: '/posts/top_writers/' }
       ];
     }
   }

@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-baseUrl = 'http://localhost:6001/users/top_followers/?items=15'
- optionSubject = new BehaviorSubject<string>('');
+baseUrl = 'http://localhost:6001'
+path =''
+ optionSubject = new BehaviorSubject<string>('/users/top_followers/');
   constructor(private http: HttpClient ) { }
 
-  getDummy() {
-   return this.http.get(this.baseUrl)
+  getDummy(path: string): Observable<any>{
+   return this.http.get(this.baseUrl+path)
 
 
 

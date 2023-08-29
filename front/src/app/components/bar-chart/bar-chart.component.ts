@@ -9,7 +9,7 @@ import { DataService } from 'src/app/services/data.service';
 export class BarChartComponent {
   barChart!: Chart;
   @Input() label: string ='views';
-  @Input() users!: any[];
+  @Input() data!: any[];
 
 
   constructor( public renderer: Renderer2, private dataService: DataService){
@@ -26,7 +26,7 @@ this.dataService.optionSubject.subscribe(res=>{
   }
 
   ngOnChanges(changes: SimpleChanges): void{
-  this.users = changes?.['users'].currentValue
+  this.data = changes?.['data'].currentValue
 
   this.createBarChart()
 }
@@ -42,8 +42,8 @@ this.dataService.optionSubject.subscribe(res=>{
 
     if (ctx) {
  
-      const userLabels = this.users.map((user: any) => user.id);
-      const userFollowers = this.users.map((user: any) => user.total);
+      const userLabels = this.data.map((user: any) => user.id);
+      const userFollowers = this.data.map((user: any) => user.total);
       const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
 
       // colors.forEach((color: string, index: number) =>  {gradient.addColorStop(index, color)})
