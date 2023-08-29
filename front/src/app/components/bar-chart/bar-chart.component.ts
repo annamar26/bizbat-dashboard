@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Renderer2, SimpleChanges } from '@angular/core';
-import { Chart } from 'chart.js';
+import { Chart, ChartTypeRegistry } from 'chart.js';
 import { DataService } from 'src/app/services/data.service';
 @Component({
   selector: 'app-bar-chart',
@@ -45,11 +45,12 @@ this.dataService.optionSubject.subscribe(res=>{
       const userLabels = this.data.map((user: any) => user.id);
       const userFollowers = this.data.map((user: any) => user.total);
       const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+      console.log('label', this.label)
 
       // colors.forEach((color: string, index: number) =>  {gradient.addColorStop(index, color)})
 
       this.barChart = new Chart(ctx, {
-        type: 'bar',
+        type: this.label.includes('top') ? 'bar': 'pie' as keyof ChartTypeRegistry,
         data: {
           labels: userLabels,
           datasets: [
