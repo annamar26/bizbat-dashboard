@@ -26,7 +26,7 @@ class PostsTopViews(MethodView):
             items = int(request.args.get("items")) if request.args.get("items") else 10
             users = controller.get_top_n_of_total_views(items)
             response = make_response(convert_data(users, "application/json"), 200)
-            response.headers.add('Access-Control-Allow-Origin', '*')
+            response.headers.add("Access-Control-Allow-Origin", "*")
             return response
         except ValueError as ex:
             eh = ExceptionHandler()
@@ -51,7 +51,7 @@ class PostsTopLikes(MethodView):
             items = int(request.args.get("items")) if request.args.get("items") else 10
             users = controller.get_top_n_of_total_likes(items)
             response = make_response(convert_data(users, "application/json"), 200)
-            response.headers.add('Access-Control-Allow-Origin', '*')
+            response.headers.add("Access-Control-Allow-Origin", "*")
             return response
         except ValueError as ex:
             eh = ExceptionHandler()
@@ -76,7 +76,7 @@ class PostsTopWriters(MethodView):
             items = int(request.args.get("items")) if request.args.get("items") else 10
             users = controller.get_top_n_of_writers(items)
             response = make_response(convert_data(users, "application/json"), 200)
-            response.headers.add('Access-Control-Allow-Origin', '*')
+            response.headers.add("Access-Control-Allow-Origin", "*")
             return response
         except ValueError as ex:
             eh = ExceptionHandler()

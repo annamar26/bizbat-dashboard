@@ -26,7 +26,7 @@ class LiveEventsTopMostExpensive(MethodView):
             items = int(request.args.get("items")) if request.args.get("items") else 10
             users = controller.get_top_n_more_expensive(items)
             response = make_response(convert_data(users, "application/json"), 200)
-            response.headers.add('Access-Control-Allow-Origin', '*')
+            response.headers.add("Access-Control-Allow-Origin", "*")
             return response
         except ValueError as ex:
             eh = ExceptionHandler()
@@ -51,7 +51,7 @@ class LiveEventsTopCheapest(MethodView):
             items = int(request.args.get("items")) if request.args.get("items") else 10
             users = controller.get_top_n_cheaper(items)
             response = make_response(convert_data(users, "application/json"), 200)
-            response.headers.add('Access-Control-Allow-Origin', '*')
+            response.headers.add("Access-Control-Allow-Origin", "*")
             return response
         except ValueError as ex:
             eh = ExceptionHandler()

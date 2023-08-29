@@ -10,8 +10,7 @@ class InvalidDataException(Exception):
     pass
 
 
-class ExceptionHandler():
-
+class ExceptionHandler:
     def __init__(self):
         self.logger = logging.getLogger(type(self).__name__)
 
